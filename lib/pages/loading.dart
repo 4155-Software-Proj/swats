@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-//import 'package:mongo_dart/mongo_dart.dart';
-import 'package:swats/services/dbDriver.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -13,16 +11,6 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> {
   void fakeTime() async {
     //TODO: Establish Database connection here
-    DbDriver dbdriver = DbDriver("dbUser", "D84QoKqKke81CHoQ", "swats");
-    //await DbDriver.createConnection('dbUser', "D84QoKqKke81CHoQ", "swats");
-    await dbdriver.createConnection();
-    print('Successful Connection');
-    dbdriver.setCollection('swatsCustomers');
-    print('set DB successful');
-    var result = await dbdriver.findOneResult("Jimmy R Lynch & Sons Inc");
-    print( result );
-    
-
     await Future.delayed(
         Duration(seconds: 5)); //TODO: Remove in prod, fake wait
 

@@ -21,13 +21,8 @@ void main() {
       //Scan Out Here
       //'/orderSummaryOut': (context) => OrderSummaryOut(), //This should have a confirmation pop in /mainMenu
       //Order Lookup Screen Flow
-<<<<<<< HEAD
       '/lookUpOrder': (context) => LookUpOrder(),
       '/lookUpInfo': (context) => LookUpInfo(),
-=======
-      //'/lookUpOrder': (context) => LookUpOrder(),
-      //'/lookUpInfo': (context) => LookUpInfo(),
->>>>>>> origin/master
       //Reports Screen Flow
       //'/reportOptions': (context) => ReportOptions(),
       //'/reportOutOrder': (context) => ReportOutOrder(),
