@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        backgroundColor: Colors.amber[400],
+        backgroundColor: Colors.amber,
       ),
       backgroundColor: Colors.black,
       body: Center(
