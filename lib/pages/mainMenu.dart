@@ -87,7 +87,7 @@ class _MainMenuState extends State<MainMenu> {
                       primary: Colors.amber,
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/lookUpOrder');
+                      Navigator.pushNamed(context, '/lookUpOrder');
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
