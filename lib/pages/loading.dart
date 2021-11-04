@@ -11,7 +11,9 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> {
   void fakeTime() async {
     //TODO: Establish Database connection here
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(
+        Duration(seconds: 5)); //TODO: Remove in prod, fake wait
+
     Navigator.pushReplacementNamed(context, '/login');
   }
 
