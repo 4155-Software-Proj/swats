@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swats/pages/loading.dart';
 import 'package:swats/pages/login.dart';
 import 'package:swats/pages/mainMenu.dart';
+import 'package:swats/pages/orderCheckInScan.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -12,6 +13,7 @@ void main() {
       '/mainMenu': (context) => MainMenu(),
       //Order Check-in Screen Flow
       //Scan In Here
+      '/orderCheckInScan': (context) => OrderCheckInScan(),
       //'/orderCheckIn': (context) => OrderCheckIn(),
       //Scan Bin Here
       //'/orderSummaryIn': (context) => OrderSummaryIn(), //This should have a confirmation pop in /mainMenu

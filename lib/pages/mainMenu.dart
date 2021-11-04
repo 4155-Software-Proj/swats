@@ -16,7 +16,7 @@ class _MainMenuState extends State<MainMenu> {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Row( 
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text('Main Menu'),
@@ -40,7 +40,11 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          context, '/orderCheckInScan'
+                          );
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
