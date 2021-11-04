@@ -1,25 +1,15 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class LookUpOrder extends StatefulWidget {
+  const LookUpOrder({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _LookUpOrderState createState() => _LookUpOrderState();
 }
 
-class _LoginState extends State<Login> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Future((){
-      final snackBar = SnackBar(
-        backgroundColor: Colors.green[600],
-        content: Text('Connection to DB was a Success!'))
-        ;
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    });
-  }
+class _LookUpOrderState extends State<LookUpOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +19,7 @@ class _LoginState extends State<Login> {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.amber[400],
       ),
       backgroundColor: Colors.black,
       body: Center(
@@ -40,7 +30,7 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text(
-                  'SWATS',
+                  'Look Up Order',
                   style: TextStyle(
                     letterSpacing: 2.0,
                     fontFamily: 'Oswald',
@@ -48,7 +38,6 @@ class _LoginState extends State<Login> {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 20),
                 const TextField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
@@ -59,33 +48,9 @@ class _LoginState extends State<Login> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 2.0, color: Colors.amber),
                     ),
-                    labelText: 'Username',
+                    labelText: 'Barcode Scan',
                     // fillColor: Colors.grey[400],
                     // filled: true,
-                    focusColor: Colors.amber,
-                    floatingLabelStyle: TextStyle(
-                      color: Colors.amber,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    ),
-                    labelStyle: TextStyle(
-                      color: Colors.amber,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const TextField(
-                  obscureText: true,
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2.0, color: Colors.amber),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2.0, color: Colors.amber),
-                    ),
-                    labelText: 'Password',
                     focusColor: Colors.amber,
                     floatingLabelStyle: TextStyle(
                       color: Colors.amber,
@@ -103,10 +68,9 @@ class _LoginState extends State<Login> {
                       side: BorderSide(width: 1.0, color: Colors.amber),
                       primary: Colors.amber),
                   onPressed: () {
-                    //print('Test Push');
-                    Navigator.pushReplacementNamed(context, '/mainMenu');
+                    Navigator.pushReplacementNamed(context, '/lookUpInfo');
                   },
-                  child: Text('Login'),
+                  child: Text('Look Up'),
                 ),
               ],
             ),
