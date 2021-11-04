@@ -16,7 +16,13 @@ class _MainMenuState extends State<MainMenu> {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: const Text('Main Menu'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('Main Menu'),
+            Text('User: TestUser'),
+          ],
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -35,7 +41,9 @@ class _MainMenuState extends State<MainMenu> {
                       primary: Colors.amber,
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/orderCheckIn');
+                      Navigator.pushNamed(
+                          context, '/orderCheckInScan'
+                          );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
