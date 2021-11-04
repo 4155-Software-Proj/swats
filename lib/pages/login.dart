@@ -87,10 +87,12 @@ class _LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 20),
                 OutlinedButton(
-                  style: OutlinedButton.styleFrom(side: BorderSide(width: 1.0, color: Colors.amber), primary: Colors.amber), 
-                 
+                  style: OutlinedButton.styleFrom(
+                      side: BorderSide(width: 1.0, color: Colors.amber),
+                      primary: Colors.amber),
                   onPressed: () {
-                    print('Test Push');
+                    //print('Test Push');
+                    Navigator.pushReplacementNamed(context, '/mainMenu');
                   },
                   child: Text('Login'),
                 ),
