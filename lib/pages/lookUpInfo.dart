@@ -1,13 +1,15 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class LookUpInfo extends StatefulWidget {
+  const LookUpInfo({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _LookUpInfoState createState() => _LookUpInfoState();
 }
 
-class _LoginState extends State<Login> {
+class _LookUpInfoState extends State<LookUpInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,7 @@ class _LoginState extends State<Login> {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.amber[400],
       ),
       backgroundColor: Colors.black,
       body: Center(
@@ -28,7 +30,7 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text(
-                  'SWATS',
+                  'Look Up Order',
                   style: TextStyle(
                     letterSpacing: 2.0,
                     fontFamily: 'Oswald',
@@ -36,7 +38,6 @@ class _LoginState extends State<Login> {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 20),
                 const TextField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
@@ -47,7 +48,7 @@ class _LoginState extends State<Login> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 2.0, color: Colors.amber),
                     ),
-                    labelText: 'Username',
+                    labelText: 'Customer Name: John Doe', //Placeholder
                     // fillColor: Colors.grey[400],
                     // filled: true,
                     focusColor: Colors.amber,
@@ -61,9 +62,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
                 const TextField(
-                  obscureText: true,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -73,7 +72,9 @@ class _LoginState extends State<Login> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 2.0, color: Colors.amber),
                     ),
-                    labelText: 'Password',
+                    labelText: 'Account Number: 12345678', //Placeholder
+                    // fillColor: Colors.grey[400],
+                    // filled: true,
                     focusColor: Colors.amber,
                     floatingLabelStyle: TextStyle(
                       color: Colors.amber,
@@ -85,16 +86,38 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2.0, color: Colors.amber),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2.0, color: Colors.amber),
+                    ),
+                    labelText: 'Bin Number: 987654321', //Placeholder
+                    // fillColor: Colors.grey[400],
+                    // filled: true,
+                    focusColor: Colors.amber,
+                    floatingLabelStyle: TextStyle(
+                      color: Colors.amber,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                    labelStyle: TextStyle(
+                      color: Colors.amber,
+                    ),
+                  ),
+                ),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
                       side: BorderSide(width: 1.0, color: Colors.amber),
                       primary: Colors.amber),
                   onPressed: () {
-                    //print('Test Push');
                     Navigator.pushReplacementNamed(context, '/mainMenu');
                   },
-                  child: Text('Login'),
+                  child: Text('Done'),
                 ),
               ],
             ),
