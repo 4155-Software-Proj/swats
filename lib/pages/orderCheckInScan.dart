@@ -10,7 +10,16 @@ class OrderCheckInScan extends StatefulWidget {
 }
 
 class _OrderCheckInScanState extends State<OrderCheckInScan> {
+  late FocusNode docField;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    docField = FocusNode();
+  }
+
   final fieldText = TextEditingController();
+
   void clearText() {
     fieldText.clear();
   }
@@ -32,6 +41,7 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
             TextField(
               controller: fieldText,
               autofocus: true,
+              focusNode: docField,
               onSubmitted: (String value) {
                 setState(() {
                   result = value;
@@ -39,7 +49,7 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
                   documents.add(result);
                 });
                 clearText();
-                FocusScope.of(context).previousFocus();
+                docField.requestFocus();
               },
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
@@ -68,9 +78,15 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
               height: 10,
             ),
             Expanded(
-              child: ListView( 
+              child: ListView(
                 shrinkWrap: true,
-                children: documents.map((document) => Text(document, textAlign: TextAlign.center, style: TextStyle(letterSpacing: 2.0, fontSize: 20),)).toList(),
+                children: documents
+                    .map((document) => Text(
+                          document,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(letterSpacing: 2.0, fontSize: 20),
+                        ))
+                    .toList(),
               ),
             ),
             // SingleChildScrollView(
@@ -84,6 +100,21 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
             //     ),
             //   ),
             // ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        autofocus: false,
+        onPressed: () {
+          Navigator.pushNamed(context,
+              '/orderCheckIn'); //TODO: Pass doc list through to next screen
+        },
+        backgroundColor: Colors.green[700],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.arrow_forward_ios, size: 15),
+            Text('Next'),
           ],
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:swats/pages/loading.dart';
 import 'package:swats/pages/login.dart';
 import 'package:swats/pages/mainMenu.dart';
 import 'package:swats/pages/orderCheckInScan.dart';
+import 'package:swats/pages/orderCheckInDetails.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,7 +15,7 @@ void main() {
       //Order Check-in Screen Flow
       //Scan In Here
       '/orderCheckInScan': (context) => OrderCheckInScan(),
-      //'/orderCheckIn': (context) => OrderCheckIn(),
+      '/orderCheckIn': (context) => OrderCheckInDetails(),
       //Scan Bin Here
       //'/orderSummaryIn': (context) => OrderSummaryIn(), //This should have a confirmation pop in /mainMenu
       //Order Checkout Screen Flow
