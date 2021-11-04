@@ -16,13 +16,7 @@ class _MainMenuState extends State<MainMenu> {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Row( 
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Main Menu'),
-            Text('User: TestUser'),
-          ],
-        ),
+        title: const Text('Main Menu'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
