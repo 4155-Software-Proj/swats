@@ -35,7 +35,7 @@ class _MainMenuState extends State<MainMenu> {
                       primary: Colors.amber,
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/lookUpOrder');
+                      Navigator.pushReplacementNamed(context, '/orderCheckIn');
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +78,9 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/lookUpOrder');
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -98,7 +100,9 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
