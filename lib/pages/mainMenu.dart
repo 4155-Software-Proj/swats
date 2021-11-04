@@ -34,13 +34,15 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/lookUpOrder');
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(Icons.add, color: Colors.black),
                         Text(
-                          'Order Checkin',
+                          'Order Check-In',
                           style: TextStyle(color: Colors.black),
                           textAlign: TextAlign.center,
                         ),
