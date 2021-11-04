@@ -20,7 +20,7 @@ void main() {
       //'/orderSummaryOut': (context) => OrderSummaryOut(), //This should have a confirmation pop in /mainMenu
       //Order Lookup Screen Flow
       //'/lookUpOrder': (context) => LookUpOrder(),
-      //'/lookUpInfo': (context) => LookUpInfo(), 
+      //'/lookUpInfo': (context) => LookUpInfo(),
       //Reports Screen Flow
       //'/reportOptions': (context) => ReportOptions(),
       //'/reportOutOrder': (context) => ReportOutOrder(),
