@@ -9,6 +9,18 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future((){
+      final snackBar = SnackBar(
+        backgroundColor: Colors.green[600],
+        content: Text('Connection to DB was a Success!'))
+        ;
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
