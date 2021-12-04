@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:swats/services/dbDriver.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -10,11 +11,19 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   void fakeTime() async {
+    // dynamic customers = await DbDriver.getCustomers();
+    // dynamic order = await DbDriver.getOrder("23456");
+    // dynamic orders = await DbDriver.getOrdersByCustomer("I00100");
     //TODO: Establish Database connection here
     await Future.delayed(
         Duration(seconds: 5)); //TODO: Remove in prod, fake wait
-
+    // print(customers.toString());
+    // print(order.toString());
+    
+    // print(orders[1].toString());
     Navigator.pushReplacementNamed(context, '/login');
+    
+    
   }
 
   @override

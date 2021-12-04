@@ -6,8 +6,10 @@ import 'package:swats/pages/lookUpOrder.dart';
 import 'package:swats/pages/lookUpInfo.dart';
 import 'package:swats/pages/orderCheckInScan.dart';
 import 'package:swats/pages/orderCheckInDetails.dart';
+import 'package:swats/services/dbDriver.dart';
 
-void main() {
+void main() async {
+  await DbDriver.connect();
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
