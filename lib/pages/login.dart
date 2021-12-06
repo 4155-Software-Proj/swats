@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:swats/services/dbDriver.dart';
+import 'package:crypt/crypt.dart';
+import 'package:flutter_session/flutter_session.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -9,17 +12,20 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   @override
+  final usernameTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future((){
+
+    Future(() {
       final snackBar = SnackBar(
-        backgroundColor: Colors.green[600],
-        content: Text('Connection to DB was a Success!'))
-        ;
+          backgroundColor: Colors.green[600],
+          content: Text('Connection to DB was a Success!'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +55,8 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const TextField(
+                TextField(
+                  controller: usernameTextController,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -74,7 +81,8 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const TextField(
+                TextField(
+                  controller: passwordTextController,
                   obscureText: true,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
@@ -102,9 +110,60 @@ class _LoginState extends State<Login> {
                   style: OutlinedButton.styleFrom(
                       side: BorderSide(width: 1.0, color: Colors.amber),
                       primary: Colors.amber),
-                  onPressed: () {
+                  onPressed: () async {
+                    //Check user password
+                    String userID = usernameTextController
+                        .text; // Retrieve and store entered username
+                    String password = passwordTextController.text;
+
+                    //Query DB to get user profile and check password
+
+                    dynamic userProfile = await DbDriver.getUser(userID);
+
+                    if (userProfile.length == 0) {
+                      // TODO: Issue error for no user found, clear text fields
+                      print('User Not found!');
+                    } else {
+                      //Check to make sure users password is correct
+                      //final parsedAppPassword = Crypt(password);
+                      print(userProfile.toString());
+                      print(userProfile[0]["passwordSecure"]);
+                      final parsedDatabasePassword =
+                          Crypt(userProfile[0]["passwordSecure"]);
+
+                      if (parsedDatabasePassword.match(password)) {
+                        //Check if the password match
+                        print("Login Processed and Passed");
+
+                        userProfile[0].keys.forEach((k) async =>
+                            await FlutterSession()
+                                .set(k, userProfile[0][k].toString()));
+
+                        print(await FlutterSession().get("dateCreated"));
+
+                        String userID = await FlutterSession().get("userID");
+                        String userFirstName =
+                            await FlutterSession().get("firstName");
+                        String userLastName =
+                            await FlutterSession().get("lastName");
+
+                        var arrArray = [userID, userFirstName, userLastName];
+
+                        print(await FlutterSession().get("userLevel"));
+
+                        Navigator.pushReplacementNamed(context, '/mainMenu',
+                            arguments: arrArray);
+                        //Login User and proceed with creating session and setting session vars
+                      } else {
+                        print("password check failed");
+                        passwordTextController.clear();
+                        final snackBar = SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text('Incorrect Password'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    }
                     //print('Test Push');
-                    Navigator.pushReplacementNamed(context, '/mainMenu');
                   },
                   child: Text('Login'),
                 ),
