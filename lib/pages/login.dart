@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swats/services/dbDriver.dart';
 import 'package:crypt/crypt.dart';
+import 'package:flutter_session/flutter_session.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -119,8 +120,9 @@ class _LoginState extends State<Login> {
 
                     dynamic userProfile = await DbDriver.getUser(userID);
 
-                    if (userProfile == []) {
+                    if (userProfile.length == 0) {
                       // TODO: Issue error for no user found, clear text fields
+                      print('User Not found!');
                     } else {
                       //Check to make sure users password is correct
                       //final parsedAppPassword = Crypt(password);
@@ -132,13 +134,36 @@ class _LoginState extends State<Login> {
                       if (parsedDatabasePassword.match(password)) {
                         //Check if the password match
                         print("Login Processed and Passed");
+
+                        userProfile[0].keys.forEach((k) async =>
+                            await FlutterSession()
+                                .set(k, userProfile[0][k].toString()));
+
+                        print(await FlutterSession().get("dateCreated"));
+
+                        String userID = await FlutterSession().get("userID");
+                        String userFirstName =
+                            await FlutterSession().get("firstName");
+                        String userLastName =
+                            await FlutterSession().get("lastName");
+
+                        var arrArray = [userID, userFirstName, userLastName];
+
+                        print(await FlutterSession().get("userLevel"));
+
+                        Navigator.pushReplacementNamed(context, '/mainMenu',
+                            arguments: arrArray);
                         //Login User and proceed with creating session and setting session vars
                       } else {
                         print("password check failed");
+                        passwordTextController.clear();
+                        final snackBar = SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text('Incorrect Password'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     }
                     //print('Test Push');
-                    Navigator.pushReplacementNamed(context, '/mainMenu');
                   },
                   child: Text('Login'),
                 ),

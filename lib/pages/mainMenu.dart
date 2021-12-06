@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -11,7 +12,11 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
   @override
+  
+
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)!.settings.arguments as List;
+    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -20,7 +25,7 @@ class _MainMenuState extends State<MainMenu> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text('Main Menu'),
-            Text('User: TestUser'),
+            Text('User: ' + arguments[1] + " " + arguments[2]),
           ],
         ),
         centerTitle: true,
@@ -41,9 +46,7 @@ class _MainMenuState extends State<MainMenu> {
                       primary: Colors.amber,
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(
-                          context, '/orderCheckInScan'
-                          );
+                      Navigator.pushNamed(context, '/orderCheckInScan');
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -108,9 +111,7 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
-                    onPressed: () {
-                      
-                    },
+                    onPressed: () {},
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
