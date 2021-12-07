@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:uuid/uuid.dart';
 
 class DbDriver {
   static dynamic db;
@@ -28,6 +29,26 @@ class DbDriver {
   static Future<List<Map<String, dynamic>>> getCustomers() async {
     //Gets all customers
     dynamic customers = await customerCollection.find().toList();
+    return customers;
+  }
+
+  static Future<List<Map<String, dynamic>>> getCustomersAccountAndName() async {
+    //Gets all customers
+    dynamic customers = await customerCollection
+        .find(where.fields(['customerName', "customerAccountNumber"]))
+        .toList();
+
+    return customers;
+  }
+
+  static Future<List<Map<String, dynamic>>> getCustomersAccountAndNamePartial(
+      String term) async {
+    //Gets all customers
+    await customerCollection.createIndex(keys: {'customerName': 'text', 'customerAccountNumber': 'text'});
+    dynamic customers = await customerCollection.find({
+      r'$text': {r'$search': term}
+    }).toList();
+
     return customers;
   }
 
@@ -61,6 +82,11 @@ class DbDriver {
         .find(where.eq('customerAccountNumber', customerAccountNumber))
         .toList();
     return order;
+  }
+
+  static void insertOrder (List<String> documents,  String customerAccountNumber, String binLocation) async{
+    var uuid = Uuid();
+    await orderCollection.insertOne({'documents' : documents, 'dateCreated': DateTime.now().millisecondsSinceEpoch, 'binLocation': binLocation, 'pickedUp': false, 'customerAccountNumber': customerAccountNumber, 'orderID': uuid.v1()});
   }
 
   // String username;

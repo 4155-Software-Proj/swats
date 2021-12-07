@@ -52,7 +52,7 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
                 docField.requestFocus();
               },
               style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(width: 2.0, color: Colors.black),
@@ -74,7 +74,7 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(
@@ -107,7 +107,7 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
         autofocus: false,
         onPressed: () {
           Navigator.pushNamed(context,
-              '/orderCheckIn'); //TODO: Pass doc list through to next screen
+              '/orderCheckIn', arguments: documents); //TODO: Pass doc list through to next screen
         },
         backgroundColor: Colors.green[700],
         child: Column(
