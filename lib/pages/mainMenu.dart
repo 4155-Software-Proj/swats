@@ -140,7 +140,7 @@ class _MainMenuState extends State<MainMenu> {
                       primary: Colors.amber,
                     ),
                     onPressed: arguments[3][1] ? () => Navigator.pushNamed(context, '/customerManagement') : null,
-                    //Past Attempts, keeping for reuse
+                    
                     // () {
                     //   List<bool> test = arguments[3] as List<bool>;
                     //   print(arguments[3]);
