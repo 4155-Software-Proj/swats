@@ -7,6 +7,8 @@ import 'package:swats/pages/lookUpInfo.dart';
 import 'package:swats/pages/orderCheckInScan.dart';
 import 'package:swats/pages/orderCheckInDetails.dart';
 import 'package:swats/pages/orderCheckInConfirm.dart';
+import 'package:swats/pages/orderCheckOutDetails.dart';
+import 'package:swats/pages/orderCheckOutScan.dart';
 import 'package:swats/services/dbDriver.dart';
 
 void main() async {
@@ -25,6 +27,8 @@ void main() async {
       //Scan Bin Here
       //'/orderSummaryIn': (context) => OrderSummaryIn(), //This should have a confirmation pop in /mainMenu
       //Order Checkout Screen Flow
+      '/orderCheckOutScan': (context) => OrderCheckOutScan(),
+      '/orderCheckOutDetails': (context) => OrderCheckOutDetails(),
       //Scan Out Here
       //'/orderSummaryOut': (context) => OrderSummaryOut(), //This should have a confirmation pop in /mainMenu
       //Order Lookup Screen Flow
