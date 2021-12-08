@@ -8,6 +8,7 @@ import 'package:swats/pages/orderCheckInScan.dart';
 import 'package:swats/pages/orderCheckInDetails.dart';
 import 'package:swats/pages/orderCheckInConfirm.dart';
 import 'package:swats/services/dbDriver.dart';
+import 'package:swats/pages/customerMangement.dart';
 
 void main() async {
   await DbDriver.connect();
@@ -34,6 +35,9 @@ void main() async {
       //'/reportOptions': (context) => ReportOptions(),
       //'/reportOutOrder': (context) => ReportOutOrder(),
       //'/reportCurrProdQuant': (context) => ReportCurrProdQuant(),
+
+      //Customer Mangement
+      '/customerManagement': (context) => CustomerManagement(),
     },
   ));
 }
