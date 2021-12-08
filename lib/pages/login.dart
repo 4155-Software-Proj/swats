@@ -124,9 +124,9 @@ class _LoginState extends State<Login> {
                       // TODO: Issue error for no user found, clear text fields
                       print('User Not found!');
                       final snackBar = SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text('User Not Found'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          backgroundColor: Colors.red,
+                          content: Text('User Not Found'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
                       //Check to make sure users password is correct
                       //final parsedAppPassword = Crypt(password);
@@ -151,7 +151,10 @@ class _LoginState extends State<Login> {
                         String userLastName =
                             await FlutterSession().get("lastName");
 
-                        var arrArray = [userID, userFirstName, userLastName];
+                        List<dynamic> userPerms =
+                            await FlutterSession().get("userLevel");
+
+                        var arrArray = [userID, userFirstName, userLastName, userPerms];
 
                         print(await FlutterSession().get("userLevel"));
 
