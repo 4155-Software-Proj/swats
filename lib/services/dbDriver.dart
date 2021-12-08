@@ -32,6 +32,12 @@ class DbDriver {
     return customers;
   }
 
+  static Future<List<Map<String, dynamic>>> getCustomerByAccountNumber(String accountNumber) async {
+    //Gets all customers
+    dynamic customer = await customerCollection.find(where.eq("customerAccountNumber", accountNumber)).toList();
+    return customer;
+  }
+
   static Future<List<Map<String, dynamic>>> getCustomersAccountAndName() async {
     //Gets all customers
     dynamic customers = await customerCollection
@@ -44,7 +50,8 @@ class DbDriver {
   static Future<List<Map<String, dynamic>>> getCustomersAccountAndNamePartial(
       String term) async {
     //Gets all customers
-    await customerCollection.createIndex(keys: {'customerName': 'text', 'customerAccountNumber': 'text'});
+    await customerCollection.createIndex(
+        keys: {'customerName': 'text', 'customerAccountNumber': 'text'});
     dynamic customers = await customerCollection.find({
       r'$text': {r'$search': term}
     }).toList();
@@ -84,9 +91,33 @@ class DbDriver {
     return order;
   }
 
-  static void insertOrder (List<String> documents,  String customerAccountNumber, String binLocation) async{
+  static Future<List<Map<String, dynamic>>> getOrdersByDocument(
+      String documentNumber) async {
+    dynamic order = await orderCollection
+        .find(where..eq("documents", documentNumber))
+        .toList();
+    return order;
+  }
+
+  static void updateOrderCheckout(String orderID, List<int> signature) async {
+    dynamic order = await orderCollection.update(
+        where.eq("orderID", orderID), modify.set("signature", signature));
+
+        order = await orderCollection.update(
+        where.eq("orderID", orderID), modify.set("pickedUp", true));
+  }
+
+  static void insertOrder(List<String> documents, String customerAccountNumber,
+      String binLocation) async {
     var uuid = Uuid();
-    await orderCollection.insertOne({'documents' : documents, 'dateCreated': DateTime.now().millisecondsSinceEpoch, 'binLocation': binLocation, 'pickedUp': false, 'customerAccountNumber': customerAccountNumber, 'orderID': uuid.v1()});
+    await orderCollection.insertOne({
+      'documents': documents,
+      'dateCreated': DateTime.now().millisecondsSinceEpoch,
+      'binLocation': binLocation,
+      'pickedUp': false,
+      'customerAccountNumber': customerAccountNumber,
+      'orderID': uuid.v1()
+    });
   }
 
   // String username;
