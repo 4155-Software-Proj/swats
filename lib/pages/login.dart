@@ -127,7 +127,14 @@ class _LoginState extends State<Login> {
                           backgroundColor: Colors.red,
                           content: Text('User Not Found'));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    } else {
+                    } 
+                    else if(!userProfile[0]['activated']){
+                       final snackBar = SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text('User Disabled'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                    else {
                       //Check to make sure users password is correct
                       //final parsedAppPassword = Crypt(password);
                       print(userProfile.toString());

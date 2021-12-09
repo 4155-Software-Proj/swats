@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:swats/services/dbDriver.dart';
 
 class OrderCheckInScan extends StatefulWidget {
   const OrderCheckInScan({Key? key}) : super(key: key);
@@ -42,11 +43,21 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
               controller: fieldText,
               autofocus: true,
               focusNode: docField,
-              onSubmitted: (String value) {
+              onSubmitted: (String value) async {
+                var order = DbDriver.getOrdersByDocument(value);
                 setState(() {
                   result = value;
                   print(result);
-                  documents.add(result);
+
+                  if(order == []){
+                    documents.add(result);
+                    }else{
+                       final snackBar = SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text('Document Already Listed on Separate Order'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  
                 });
                 clearText();
                 docField.requestFocus();
@@ -106,8 +117,9 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
       floatingActionButton: FloatingActionButton(
         autofocus: false,
         onPressed: () {
-          Navigator.pushNamed(context,
-              '/orderCheckIn', arguments: documents); //TODO: Pass doc list through to next screen
+          Navigator.pushNamed(context, '/orderCheckIn',
+              arguments:
+                  documents); //TODO: Pass doc list through to next screen
         },
         backgroundColor: Colors.green[700],
         child: Column(

@@ -26,6 +26,17 @@ class DbDriver {
     return users;
   }
 
+  static dynamic changeUserStatus(String userID) async {
+    //Change user between disabeled and enabled
+
+    bool activated;
+    var user = await userCollection.find(where.eq('userID', userID)).toList();
+
+    activated = user[0]['activated'];
+    await userCollection.update(
+        where.eq('userID', userID), modify.set('activated', !activated));
+    return true;
+  }
 
   static Future<List<Map<String, dynamic>>> getCustomers() async {
     //Gets all customers
@@ -33,19 +44,19 @@ class DbDriver {
     return customers;
   }
 
-
- 
-  static void deleteCustomer(String customerAccountNumber) async{
-    await customerCollection.deleteOne({"customerAccountNumber" : customerAccountNumber});
+  static void deleteCustomer(String customerAccountNumber) async {
+    await customerCollection
+        .deleteOne({"customerAccountNumber": customerAccountNumber});
   }
 
-  static Future<List<Map<String, dynamic>>> getCustomerByAccountNumber(String accountNumber) async {
+  static Future<List<Map<String, dynamic>>> getCustomerByAccountNumber(
+      String accountNumber) async {
     //Gets all customers
-    dynamic customer = await customerCollection.find(where.eq("customerAccountNumber", accountNumber)).toList();
+    dynamic customer = await customerCollection
+        .find(where.eq("customerAccountNumber", accountNumber))
+        .toList();
     return customer;
-
   }
-
 
   static Future<List<Map<String, dynamic>>> getCustomersAccountAndName() async {
     //Gets all customers
@@ -60,7 +71,8 @@ class DbDriver {
       String term) async {
     //Gets all customers
 
-    await customerCollection.createIndex(keys: {'customerName': 'text', 'customerAccountNumber': 'text'});
+    await customerCollection.createIndex(
+        keys: {'customerName': 'text', 'customerAccountNumber': 'text'});
 
     dynamic customers = await customerCollection.find({
       r'$text': {r'$search': term}
@@ -101,7 +113,6 @@ class DbDriver {
     return order;
   }
 
-
   static Future<List<Map<String, dynamic>>> getOrdersByDocument(
       String documentNumber) async {
     dynamic order = await orderCollection
@@ -114,7 +125,7 @@ class DbDriver {
     dynamic order = await orderCollection.update(
         where.eq("orderID", orderID), modify.set("signature", signature));
 
-        order = await orderCollection.update(
+    order = await orderCollection.update(
         where.eq("orderID", orderID), modify.set("pickedUp", true));
   }
 
@@ -129,7 +140,6 @@ class DbDriver {
       'customerAccountNumber': customerAccountNumber,
       'orderID': uuid.v1()
     });
-
   }
 
   // String username;
