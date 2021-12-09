@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:swats/services/dbDriver.dart';
 
 class LookUpOrder extends StatefulWidget {
   const LookUpOrder({Key? key}) : super(key: key);
@@ -10,12 +11,14 @@ class LookUpOrder extends StatefulWidget {
 }
 
 class _LookUpOrderState extends State<LookUpOrder> {
+  final docField = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Login',
+          'Lookup Order',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
@@ -29,16 +32,30 @@ class _LookUpOrderState extends State<LookUpOrder> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Look Up Order',
-                  style: TextStyle(
-                    letterSpacing: 2.0,
-                    fontFamily: 'Oswald',
-                    fontSize: 50,
-                    color: Colors.white,
-                  ),
-                ),
-                const TextField(
+                // const Text(
+                //   'Look Up Order',
+                //   style: TextStyle(
+                //     letterSpacing: 2.0,
+                //     fontFamily: 'Oswald',
+                //     fontSize: 50,
+                //     color: Colors.white,
+                //   ),
+                // ),
+                TextField(
+                  autofocus: true,
+                  controller: docField,
+                  onSubmitted: (value) async{
+                     var order =
+                        await DbDriver.getOrdersByDocument(value);
+
+                    var customer = await DbDriver.getCustomerByAccountNumber(
+                        order[0]["customerAccountNumber"]);
+
+                    order[0]["customerName"] = customer[0]["customerName"];
+                    print(order.toString());
+                    Navigator.pushReplacementNamed(context, '/lookUpInfo',
+                        arguments: order);
+                  },
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -67,8 +84,17 @@ class _LookUpOrderState extends State<LookUpOrder> {
                   style: OutlinedButton.styleFrom(
                       side: BorderSide(width: 1.0, color: Colors.amber),
                       primary: Colors.amber),
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/lookUpInfo');
+                  onPressed: () async {
+                    var order =
+                        await DbDriver.getOrdersByDocument(docField.text);
+
+                    var customer = await DbDriver.getCustomerByAccountNumber(
+                        order[0]["customerAccountNumber"]);
+
+                    order[0]["customerName"] = customer[0]["customerName"];
+                    print(order.toString());
+                    Navigator.pushReplacementNamed(context, '/lookUpInfo',
+                        arguments: order);
                   },
                   child: Text('Look Up'),
                 ),
