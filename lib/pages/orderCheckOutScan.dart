@@ -33,12 +33,22 @@ class _OrderCheckOutScanState extends State<OrderCheckOutScan> {
                     autofocus: true,
                     onSubmitted: (String value) async {
                       var order = await DbDriver.getOrdersByDocument(value);
-                      print(order);
-                      var customer = await DbDriver.getCustomerByAccountNumber(
-                          order[0]["customerAccountNumber"]);
-                      order[0]["customerName"] = customer[0]["customerName"];
-                      Navigator.pushNamed(context, '/orderCheckOutDetails',
-                          arguments: order);
+                      if (order[0]['pickedUp']) {
+                        final snackBar = SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text('Order Already Checked Out'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        scanField.clear();
+                        
+                      } else {
+                        print(order);
+                        var customer =
+                            await DbDriver.getCustomerByAccountNumber(
+                                order[0]["customerAccountNumber"]);
+                        order[0]["customerName"] = customer[0]["customerName"];
+                        Navigator.pushNamed(context, '/orderCheckOutDetails',
+                            arguments: order);
+                      }
                     },
                     style: TextStyle(color: Colors.black),
                     decoration: const InputDecoration(
