@@ -115,9 +115,9 @@ class _MainMenuState extends State<MainMenu> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.person_remove, color: Colors.black),
+                        Icon(Icons.manage_accounts, color: Colors.black),
                         Text(
-                          'Test Remove User',
+                          'User Management',
                           style: TextStyle(color: Colors.black),
                           textAlign: TextAlign.center,
                         ),
