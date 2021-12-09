@@ -9,6 +9,7 @@ import 'package:swats/pages/orderCheckInDetails.dart';
 import 'package:swats/pages/orderCheckInConfirm.dart';
 import 'package:swats/pages/orderCheckOutDetails.dart';
 import 'package:swats/pages/orderCheckOutScan.dart';
+import 'package:swats/pages/reports.dart';
 import 'package:swats/pages/userManagement.dart';
 import 'package:swats/services/dbDriver.dart';
 import 'package:swats/pages/customerMangement.dart';
@@ -36,10 +37,8 @@ void main() async {
       //Order Lookup Screen Flow
       '/lookUpOrder': (context) => LookUpOrder(),
       '/lookUpInfo': (context) => LookUpInfo(),
-      //Reports Screen Flow
-      //'/reportOptions': (context) => ReportOptions(),
-      //'/reportOutOrder': (context) => ReportOutOrder(),
-      //'/reportCurrProdQuant': (context) => ReportCurrProdQuant(),
+      //Reports
+      '/reports': (context) => Reports(),
 
       //Customer Mangement
       '/customerManagement': (context) => CustomerManagement(),

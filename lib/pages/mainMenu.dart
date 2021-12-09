@@ -118,6 +118,31 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
+                    onPressed: arguments[3][1] ? () async => { Navigator.pushNamed(context, '/reports', arguments: await DbDriver.getOverDueReport())} : null,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.summarize, color: Colors.black),
+                        Text(
+                          'Reports',
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                ],
+              ),
+              SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(100, 100),
+                      primary: Colors.amber,
+                    ),
                     onPressed: arguments[3][1] ? () async => Navigator.pushNamed(context, '/userManagement', arguments: await DbDriver.getUsers()) : null,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -131,12 +156,6 @@ class _MainMenuState extends State<MainMenu> {
                       ],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 40),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(100, 100),
