@@ -12,8 +12,14 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)!.settings.arguments as List;
+
 
     return Scaffold(
       backgroundColor: Colors.grey[300],
@@ -111,13 +117,13 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
-                    onPressed: () {},
+                    onPressed: arguments[3][1] ? () => Navigator.pushNamed(context, '/userManagement') : null,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.manage_accounts, color: Colors.black),
+                        Icon(Icons.account_circle, color: Colors.black),
                         Text(
-                          'User Management',
+                          'User Mgmt',
                           style: TextStyle(color: Colors.black),
                           textAlign: TextAlign.center,
                         ),
@@ -135,35 +141,48 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
-                    onPressed: () {},
+                    onPressed: arguments[3][1] ? () => Navigator.pushNamed(context, '/customerManagement') : null,
+                    
+                    // () {
+                    //   List<bool> test = arguments[3] as List<bool>;
+                    //   print(arguments[3]);
+                    // },
+
+                    // 
+                    // () {
+
+                    //   Navigator.pushNamed(context, '/customerManagement');
+                    // },
+                    // userLevel[1] ? null : () => Navigator.pushNamed(context, '/customerManagement');
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.air, color: Colors.black),
+                        Icon(Icons.manage_accounts, color: Colors.black),
                         Text(
-                          'Test ???',
+                          'Customer Mgmt',
                           style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(100, 100),
-                      primary: Colors.amber,
-                    ),
-                    onPressed: () {},
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(Icons.text_snippet, color: Colors.black),
-                        Text(
-                          'Test !!!!',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   style: ElevatedButton.styleFrom(
+                  //     fixedSize: const Size(100, 100),
+                  //     primary: Colors.amber,
+                  //   ),
+                  //   onPressed: () {},
+                  //   child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: <Widget>[
+                  //       Icon(Icons.text_snippet, color: Colors.black),
+                  //       Text(
+                  //         'Test !!!!',
+                  //         style: TextStyle(color: Colors.black),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ],

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import "package:flutter_typeahead/flutter_typeahead.dart";
 import "package:swats/services/dbDriver.dart";
+import "package:swats/pages/mainMenu.dart";
+import "package:flutter_session/flutter_session.dart";
 
 class OrderCheckInConfirm extends StatefulWidget {
   const OrderCheckInConfirm({Key? key}) : super(key: key);
@@ -68,10 +70,12 @@ class _OrderCheckInConfirmState extends State<OrderCheckInConfirm> {
                       fixedSize: Size(300, 100),
                       side: BorderSide(width: 1.0, color: Colors.green),
                       primary: Colors.green),
-                  onPressed: () {
+                  onPressed: () async {
                     DbDriver.insertOrder(documents, arguments[2], arguments[3]);
+
                     Navigator.popUntil(
                         context, ModalRoute.withName("/mainMenu"));
+
                   },
                   child: Text("Confirm Order Stow")),
             ),
