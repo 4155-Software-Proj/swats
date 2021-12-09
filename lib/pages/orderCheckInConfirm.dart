@@ -72,7 +72,10 @@ class _OrderCheckInConfirmState extends State<OrderCheckInConfirm> {
                       primary: Colors.green),
                   onPressed: () async {
                     DbDriver.insertOrder(documents, arguments[2], arguments[3]);
-                    Navigator.of(context).pushNamedAndRemoveUntil('/mainMenu',(Route<dynamic> route) => false, arguments: [await FlutterSession().get('userID'),await FlutterSession().get('firstName'),await FlutterSession().get('lastName')]);
+
+                    Navigator.popUntil(
+                        context, ModalRoute.withName("/mainMenu"));
+
                   },
                   child: Text("Confirm Order Stow")),
             ),
