@@ -26,6 +26,7 @@ class DbDriver {
     return users;
   }
 
+
   static Future<List<Map<String, dynamic>>> getCustomers() async {
     //Gets all customers
     dynamic customers = await customerCollection.find().toList();
@@ -33,10 +34,16 @@ class DbDriver {
   }
 
 
+ 
+  static void deleteCustomer(String customerAccountNumber) async{
+    await customerCollection.deleteOne({"customerAccountNumber" : customerAccountNumber});
+  }
+
   static Future<List<Map<String, dynamic>>> getCustomerByAccountNumber(String accountNumber) async {
     //Gets all customers
     dynamic customer = await customerCollection.find(where.eq("customerAccountNumber", accountNumber)).toList();
     return customer;
+
   }
 
 
