@@ -18,7 +18,7 @@ class _LookUpOrderState extends State<LookUpOrder> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Login',
+          'Lookup Order',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
@@ -32,17 +32,30 @@ class _LookUpOrderState extends State<LookUpOrder> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Look Up Order',
-                  style: TextStyle(
-                    letterSpacing: 2.0,
-                    fontFamily: 'Oswald',
-                    fontSize: 50,
-                    color: Colors.white,
-                  ),
-                ),
+                // const Text(
+                //   'Look Up Order',
+                //   style: TextStyle(
+                //     letterSpacing: 2.0,
+                //     fontFamily: 'Oswald',
+                //     fontSize: 50,
+                //     color: Colors.white,
+                //   ),
+                // ),
                 TextField(
+                  autofocus: true,
                   controller: docField,
+                  onSubmitted: (value) async{
+                     var order =
+                        await DbDriver.getOrdersByDocument(value);
+
+                    var customer = await DbDriver.getCustomerByAccountNumber(
+                        order[0]["customerAccountNumber"]);
+
+                    order[0]["customerName"] = customer[0]["customerName"];
+                    print(order.toString());
+                    Navigator.pushReplacementNamed(context, '/lookUpInfo',
+                        arguments: order);
+                  },
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
