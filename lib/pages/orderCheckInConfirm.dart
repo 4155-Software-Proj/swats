@@ -70,6 +70,8 @@ class _OrderCheckInConfirmState extends State<OrderCheckInConfirm> {
                       primary: Colors.green),
                   onPressed: () {
                     DbDriver.insertOrder(documents, arguments[2], arguments[3]);
+                    Navigator.popUntil(
+                        context, ModalRoute.withName("/mainMenu"));
                   },
                   child: Text("Confirm Order Stow")),
             ),
