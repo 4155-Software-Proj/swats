@@ -9,6 +9,7 @@ import 'package:swats/pages/orderCheckInDetails.dart';
 import 'package:swats/pages/orderCheckInConfirm.dart';
 import 'package:swats/pages/orderCheckOutDetails.dart';
 import 'package:swats/pages/orderCheckOutScan.dart';
+import 'package:swats/pages/userManagement.dart';
 import 'package:swats/services/dbDriver.dart';
 import 'package:swats/pages/customerMangement.dart';
 
@@ -42,6 +43,8 @@ void main() async {
 
       //Customer Mangement
       '/customerManagement': (context) => CustomerManagement(),
+      //User Management
+      '/userManagement': (context) => UserManagement(),
     },
   ));
 }

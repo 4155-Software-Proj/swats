@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
+import 'package:swats/services/dbDriver.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -117,7 +118,7 @@ class _MainMenuState extends State<MainMenu> {
                       fixedSize: const Size(100, 100),
                       primary: Colors.amber,
                     ),
-                    onPressed: arguments[3][1] ? () => Navigator.pushNamed(context, '/userManagement') : null,
+                    onPressed: arguments[3][1] ? () async => Navigator.pushNamed(context, '/userManagement', arguments: await DbDriver.getUsers()) : null,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
