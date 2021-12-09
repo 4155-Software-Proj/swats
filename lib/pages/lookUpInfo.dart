@@ -12,14 +12,20 @@ class LookUpInfo extends StatefulWidget {
 }
 
 class _LookUpInfoState extends State<LookUpInfo> {
+  late Uint8List picture;
   @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)!.settings.arguments
         as List; //Retrieve args sent from last screen
     print(arguments.toString());
-    List<int> picData = arguments[0]['signature'].cast<int>();
+    if (arguments[0]['pickedUp'] == true) {
+      List<int> picData = arguments[0]['signature'].cast<int>();
+      picture = Uint8List.fromList(picData);
+    } else {
+      picture = Uint8List.fromList([1, 2, 3]);
+    }
     //List<int> picData = arguments[0]['signature'].map((s) => s as int).toList();
-    Uint8List picture = Uint8List.fromList(picData);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,13 +46,13 @@ class _LookUpInfoState extends State<LookUpInfo> {
                 FittedBox(
                   fit: (BoxFit.fitWidth),
                   child: Text(
-                    "Customer Name: "  + arguments[0]["customerName"],
+                    "Customer Name: " + arguments[0]["customerName"],
                     style: TextStyle(color: Colors.amber, fontSize: 20),
                   ),
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Account Number: "  + arguments[0]["customerAccountNumber"],
+                  "Account Number: " + arguments[0]["customerAccountNumber"],
                   style: TextStyle(color: Colors.amber, fontSize: 20),
                 ),
                 SizedBox(height: 10),
@@ -142,29 +148,44 @@ class _LookUpInfoState extends State<LookUpInfo> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Checked Out: ", style: TextStyle(color: Colors.amber, fontSize: 20)),
-                    Checkbox(value: arguments[0]['pickedUp'], onChanged: (value){}, activeColor: Colors.green,),
+                    Text("Checked Out: ",
+                        style: TextStyle(color: Colors.amber, fontSize: 20)),
+                    Theme(
+                      child: Checkbox(
+                        tristate: true,
+                        value: arguments[0]['pickedUp'] ? true : null,
+                        onChanged: (value) {},
+                        activeColor: arguments[0]['pickedUp'] ? Colors.green : Colors.red,
+                        
+                      ),
+                      data: ThemeData(
+                      unselectedWidgetColor: Colors.white),
+                    ),
                   ],
                 ),
 
-          //       CheckboxListTile(
-                  
-          //         value: arguments[0]["pickedUp"],
-          //         onChanged: (value) {},
-          //   title: Text("Checked Out:", style: TextStyle(color: Colors.amber, fontSize: 20)),
-          // ),
-                Divider(color: Colors.amber, thickness: 2,),
+                //       CheckboxListTile(
+
+                //         value: arguments[0]["pickedUp"],
+                //         onChanged: (value) {},
+                //   title: Text("Checked Out:", style: TextStyle(color: Colors.amber, fontSize: 20)),
+                // ),
+                Divider(
+                  color: Colors.amber,
+                  thickness: 2,
+                ),
                 Container(
                   color: Colors.grey[300],
-                  child: Image.memory(picture),
+                  child: arguments[0]['pickedUp']? Image.memory(picture) : Text("No Signature to Show") ,
                 ),
-                
+
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
                       side: BorderSide(width: 1.0, color: Colors.amber),
                       primary: Colors.amber),
                   onPressed: () {
-                    Navigator.popUntil(context, ModalRoute.withName('/mainMenu'));
+                    Navigator.popUntil(
+                        context, ModalRoute.withName('/mainMenu'));
                   },
                   child: Text('Done'),
                 ),
