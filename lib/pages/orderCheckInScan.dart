@@ -44,20 +44,20 @@ class _OrderCheckInScanState extends State<OrderCheckInScan> {
               autofocus: true,
               focusNode: docField,
               onSubmitted: (String value) async {
-                var order = DbDriver.getOrdersByDocument(value);
+                var order = await DbDriver.getOrdersByDocument(value);
                 setState(() {
                   result = value;
                   print(result);
-
-                  if(order == []){
+                  print(order);
+                  if (order.isEmpty) {
                     documents.add(result);
-                    }else{
-                       final snackBar = SnackBar(
-                          backgroundColor: Colors.red,
-                          content: Text('Document Already Listed on Separate Order'));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
-                  
+                  } else {
+                    final snackBar = SnackBar(
+                        backgroundColor: Colors.red,
+                        content:
+                            Text('Document Already Listed on Separate Order'));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
                 });
                 clearText();
                 docField.requestFocus();

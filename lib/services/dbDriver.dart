@@ -134,12 +134,23 @@ class DbDriver {
     var uuid = Uuid();
     await orderCollection.insertOne({
       'documents': documents,
-      'dateCreated': DateTime.now().millisecondsSinceEpoch,
+      'dateCreated': DateTime.now(),
       'binLocation': binLocation,
       'pickedUp': false,
       'customerAccountNumber': customerAccountNumber,
       'orderID': uuid.v1()
     });
+  }
+
+  static Future<List<Map<String, dynamic>>> getOverDueReport() async {
+    print(DateTime.now().subtract(Duration(days: 30)));
+    dynamic orders = await orderCollection
+        .find(where
+            .eq('pickedUp', false)
+            .lt('dateCreated', DateTime.now().subtract(Duration(days: 29))))
+        .toList();
+    print(orders);
+    return orders;
   }
 
   // String username;
