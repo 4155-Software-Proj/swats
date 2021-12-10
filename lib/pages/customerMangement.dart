@@ -52,10 +52,6 @@ class _CustomerManagementState extends State<CustomerManagement> {
                     ),
                   ),
                   Spacer(),
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {},
-                  ),
                   SizedBox(width: 10),
                   IconButton(
                     icon: Icon(Icons.delete),
@@ -85,86 +81,97 @@ class _CustomerManagementState extends State<CustomerManagement> {
         centerTitle: true,
         backgroundColor: Colors.amber,
       ),
-      body: SingleChildScrollView(
-        child: FutureBuilder<List<Map<String, dynamic>>>(
-            future: _customers,
-            builder: (BuildContext context,
-                AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-              List<Widget> children;
-              if (snapshot.hasData) {
-                children = _buildCardList(snapshot.data);
-                print(snapshot.data);
-                print(_customers.toString());
-                // snapshot.data!
-                //     .map(
-                //       (customer) => Card(
-                //         child: Container(
-                //           height: 100,
-                //           child: Row(
-                //             children: [
-                //               Padding(
-                //                 padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                //                 child: Column(
-                //                   mainAxisAlignment: MainAxisAlignment.center,
-                //                   children: [
-                //                     Text(
-                //                       customer['customerName'],
-                //                       textAlign: TextAlign.start,
-                //                       style: TextStyle(fontSize: 15),
-                //                     ),
-                //                     Text(
-                //                       customer['customerAccountNumber'],
-                //                       textAlign: TextAlign.start,
-                //                       style: TextStyle(fontSize: 15),
-                //                     ),
-                //                   ],
-                //                 ),
-                //               ),
-                //               Spacer(),
-                //               IconButton(
-                //                 icon: Icon(Icons.edit),
-                //                 onPressed: () {},
-                //               ),
-                //               SizedBox(width: 10),
-                //               IconButton(
-                //                 icon: Icon(Icons.delete),
-                //                 onPressed: () {
-                //                   DbDriver.setState(() {});
-                //                 },
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     )
-                //     .toList();
-                //<Widget>[
-                //   Card(
-                //     child: Column(
-                //       //children: [Text(snapshot.data.toString())],
-                //       children: snapshot.data!
-                //     .map((customer) => Text(
-                //           customer['customerName'],
-                //           textAlign: TextAlign.center,
-                //           style: TextStyle(letterSpacing: 2.0, fontSize: 20),
-                //         ))
-                //     .toList(),
-                //     ),
-                //   )
-                // ];
-              } else {
-                children = <Widget>[Text("Waiting for Data")];
-              }
-              return SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: children,
-                  ),
-                ),
-              );
-            }),
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            child: FutureBuilder<List<Map<String, dynamic>>>(
+                future: _customers,
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+                  List<Widget> children;
+                  if (snapshot.hasData) {
+                    children = _buildCardList(snapshot.data);
+                    print(snapshot.data);
+                    print(_customers.toString());
+                    // snapshot.data!
+                    //     .map(
+                    //       (customer) => Card(
+                    //         child: Container(
+                    //           height: 100,
+                    //           child: Row(
+                    //             children: [
+                    //               Padding(
+                    //                 padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                    //                 child: Column(
+                    //                   mainAxisAlignment: MainAxisAlignment.center,
+                    //                   children: [
+                    //                     Text(
+                    //                       customer['customerName'],
+                    //                       textAlign: TextAlign.start,
+                    //                       style: TextStyle(fontSize: 15),
+                    //                     ),
+                    //                     Text(
+                    //                       customer['customerAccountNumber'],
+                    //                       textAlign: TextAlign.start,
+                    //                       style: TextStyle(fontSize: 15),
+                    //                     ),
+                    //                   ],
+                    //                 ),
+                    //               ),
+                    //               Spacer(),
+                    //               IconButton(
+                    //                 icon: Icon(Icons.edit),
+                    //                 onPressed: () {},
+                    //               ),
+                    //               SizedBox(width: 10),
+                    //               IconButton(
+                    //                 icon: Icon(Icons.delete),
+                    //                 onPressed: () {
+                    //                   DbDriver.setState(() {});
+                    //                 },
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     )
+                    //     .toList();
+                    //<Widget>[
+                    //   Card(
+                    //     child: Column(
+                    //       //children: [Text(snapshot.data.toString())],
+                    //       children: snapshot.data!
+                    //     .map((customer) => Text(
+                    //           customer['customerName'],
+                    //           textAlign: TextAlign.center,
+                    //           style: TextStyle(letterSpacing: 2.0, fontSize: 20),
+                    //         ))
+                    //     .toList(),
+                    //     ),
+                    //   )
+                    // ];
+                  } else {
+                    children = <Widget>[Text("Waiting for Data")];
+                  }
+                  return SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: children,
+                      ),
+                    ),
+                  );
+                }),
+          ),
+          Spacer(),
+          FloatingActionButton(
+              backgroundColor: Colors.amber,
+              child: Icon(Icons.add),
+              onPressed: () {
+                Navigator.pushNamed(context, '/addCustomer');
+              })
+        ],
       ),
     );
   }

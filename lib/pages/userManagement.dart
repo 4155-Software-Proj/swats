@@ -34,7 +34,6 @@ class _UserManagementState extends State<UserManagement> {
 
   @override
   Widget build(BuildContext context) {
-    
     if (firstRun) {
       arguments = ModalRoute.of(context)!.settings.arguments as List;
     } else {
@@ -47,49 +46,63 @@ class _UserManagementState extends State<UserManagement> {
         centerTitle: true,
         backgroundColor: Colors.amber,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-            children: arguments
-                .map((user) => Card(
-                      child: Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+                children: arguments
+                    .map((user) => Card(
+                          child: Row(
                             children: [
-                              Text(
-                                user['firstName'] + " " + user['lastName'],
-                                style: TextStyle(fontSize: 20),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    user['firstName'] + " " + user['lastName'],
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    user['userID'],
+                                    style: TextStyle(fontSize: 15),
+                                  )
+                                ],
                               ),
-                              Text(
-                                user['userID'],
-                                style: TextStyle(fontSize: 15),
-                              )
+                              Spacer(),
+                              // IconButton(
+                              //   icon: Icon(Icons.edit),
+                              //   onPressed: () {},
+                              // ),
+                              SizedBox(width: 10),
+                              IconButton(
+                                icon: Icon(user['activated']
+                                    ? Icons.person
+                                    : Icons.person_off),
+                                onPressed: () async {
+                                  await DbDriver.changeUserStatus(
+                                      user['userID']);
+                                  newArgs = await DbDriver.getUsers();
+                                  firstRun = false;
+                                  setState(() {
+                                    print("NEW ARGS =============" +
+                                        newArgs.toString());
+                                    arguments = newArgs;
+                                  });
+                                },
+                              ),
                             ],
                           ),
-                          Spacer(),
-                          IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () {},
-                          ),
-                          SizedBox(width: 10),
-                          IconButton(
-                            icon: Icon(user['activated']
-                                ? Icons.person
-                                : Icons.person_off),
-                            onPressed: () async {
-                              await DbDriver.changeUserStatus(user['userID']);
-                              newArgs = await DbDriver.getUsers();
-                              firstRun = false;
-                              setState(() {
-                                print("NEW ARGS =============" + newArgs.toString());
-                                arguments = newArgs;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ))
-                .toList()),
+                        ))
+                    .toList()),
+          ),
+          Spacer(),
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/addUser');
+            },
+            child: Icon(Icons.add),
+            backgroundColor: Colors.amber,
+          ),
+        ],
       ),
     );
   }
