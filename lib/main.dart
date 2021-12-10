@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:swats/pages/addCustomer.dart';
+import 'package:swats/pages/addUser.dart';
 import 'package:swats/pages/loading.dart';
 import 'package:swats/pages/login.dart';
 import 'package:swats/pages/mainMenu.dart';
@@ -42,8 +44,10 @@ void main() async {
 
       //Customer Mangement
       '/customerManagement': (context) => CustomerManagement(),
+      '/addCustomer': (context) => AddCustomer(),
       //User Management
       '/userManagement': (context) => UserManagement(),
+      '/addUser': (context) => AddUser(),
     },
   ));
 }

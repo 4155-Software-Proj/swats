@@ -56,7 +56,7 @@ class _MainMenuState extends State<MainMenu> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.add, color: Colors.black),
+                        Icon(Icons.get_app, color: Colors.black),
                         Text(
                           'Order Check-In',
                           style: TextStyle(color: Colors.black),
@@ -76,7 +76,7 @@ class _MainMenuState extends State<MainMenu> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.remove, color: Colors.black),
+                        Icon(Icons.upload, color: Colors.black),
                         Text(
                           'Order Checkout',
                           style: TextStyle(color: Colors.black),

@@ -81,11 +81,25 @@ class DbDriver {
     return customers;
   }
 
+  
+
   static Future<List<Map<String, dynamic>>> getUser(String userID) async {
     //Find User by UserID
     dynamic user =
         await userCollection.find(where.eq('userID', userID)).toList();
     return user;
+  }
+
+  static void addUser(String firstName, String lastName, String userID, bool admin) async{
+    await userCollection.insertOne({
+      'userID' : userID,
+      'firstName' : firstName,
+      'lastName' : lastName,
+      'dateCreated' : DateTime.now(),
+      'userLevel' : [true,admin],
+      'passwordSecure': "\$5\$exampleSalt\$WeYR0K/28Og6uYyzN5BjrmxGr/Xl8fF2c4aQgFBnb9B",
+      'activated' : true
+    });
   }
 
   // static Future<List<Map<String, dynamic>>> getCustomer(
@@ -151,6 +165,13 @@ class DbDriver {
         .toList();
     print(orders);
     return orders;
+  }
+
+  static dynamic insertCustomer(String customerName, String customerAccountNumber) async {
+    await customerCollection.insertOne({
+      'customerName': 'shit',
+      'customerAccountNumber': 'fuck'
+    });
   }
 
   // String username;
